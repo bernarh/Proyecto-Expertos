@@ -10,7 +10,11 @@
 		{
 			$this->server="localhost";
 			$this->ipServer="127.0.0.1";
+<<<<<<< HEAD
 			$this->nombreDB="db_proyecto_clinica";
+=======
+			$this->nombreDB="db_conteo_votos";
+>>>>>>> origin/master
 			$this->usuario="root";
 			$this->pass="";
 
