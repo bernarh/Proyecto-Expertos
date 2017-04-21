@@ -22,11 +22,7 @@
 <body class="login-body">
 <div class="container">
 
-<<<<<<< HEAD
-    <form class="form-signin" action="validar.php" method="post">
-=======
     <form class="form-signin" action="Backend/validar.php" method="post">
->>>>>>> origin/master
         <div class="form-signin-heading text-center">
             <h1 class="sign-title">Login</h1>
             <img src="images/login-logo.png" alt=""/>

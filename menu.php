@@ -2,22 +2,22 @@
 
 
 session_start();
-    /*
-    if (!isset($_SESSION['usuario']) AND $_SESSION['usuario'] != 1) {
-        header("location: login.php");
-        exit;
-        }
+    
+    //if (!isset($_SESSION['usuario'])) {
+      //  header("location: index.php");
+        //exit;
+        //}
 
-     */
+     
 
 
 
  function css(){
  	return '<link href="css/style.css" rel="stylesheet">'.
   			'<link href="css/style-responsive.css" rel="stylesheet">'.
-  			'<link href="fonts/css/font-awesome.min.css" rel="stylesheet" type="text/css">'.
-  			'<link rel="stylesheet" href="media/css/dataTables.bootstrap.min.css">'.
-		    '<link rel="stylesheet" href="media/font-awesome/css/font-awesome.css">';
+  			'<link href="fonts/css/font-awesome.min.css" rel="stylesheet" type="text/css">';
+  			//'<link rel="stylesheet" href="media/css/dataTables.bootstrap.min.css">'.
+		    //'<link rel="stylesheet" href="media/font-awesome/css/font-awesome.css">';
  }
 
 function scripts(){
@@ -30,13 +30,13 @@ function scripts(){
 			'<script src="js/jquery.nicescroll.js"></script>'.
 
 			'<!--common scripts for all pages-->'.
-			'<script src="js/CalculadoraPrincipal.js"></script>'.
+			//'<script src="js/CalculadoraPrincipal.js"></script>'.
 			'<script src="js/scripts.js"></script>'.
 			
-			'<!--Javascript en proyectos-->'.    
+			'<!--Javascript en proyectos-->';  
 		   // '<script src="media/js/jquery-1.10.2.js"></script>'.
-		    '<script src="media/js/jquery.dataTables.min.js"></script>'.
-		    '<script src="media/js/dataTables.bootstrap.min.js"></script>';       
+		    //'<script src="media/js/jquery.dataTables.min.js"></script>'.
+		    //'<script src="media/js/dataTables.bootstrap.min.js"></script>';       
 		    //'<script src="media/js/bootstrap.js"></script>'.
 
 }
@@ -47,11 +47,11 @@ function menu(){
 
 		        '<!--logo and iconic logo start-->'.
 		        '<div class="logo">'.
-		          '  <a href="index.php"><img src="images/logo.png" alt=""></a>'.
+		          '  <a href="index.php"><img class="img-responsive" src="images/logo.png" alt=""></a>'.
 		        '</div>'.
 
 		        '<div class="logo-icon text-center">'.
-		            '<a href="index.php"><img src="images/logo_icon.png" alt=""></a>'.
+		            '<a href="index.php"><img class="img-responsive" src="images/logo_icon.png" alt=""></a>'.
 		        '</div>'.
 		        '<!--logo and iconic logo end-->'.
 
@@ -59,20 +59,20 @@ function menu(){
 
 		            '<!--sidebar nav start-->'.
 		            '<ul class="nav nav-pills nav-stacked custom-nav">'.
-		                '<li><a href="index.php"><i class="fa fa-home"></i> <span>Inicio</span></a>'.
+		                '<li><a href="system.php?page=dashboard"><i class="fa fa-home"></i> <span>Inicio</span></a>'.
 		                '</li>'.
 		                
-		                '<li><a href="nuevoProyecto.php"><i class="fa fa-pencil-square-o"></i> <span> Ver TV</span></a></li>'.
+		                '<li><a href=""><i class="fa fa-television"></i> <span> Ver TV</span></a></li>'.
 		                
-		                '<li><a href="calculadora.php"><i class="fa fa-calculator"></i> <span>Citas</span></a></li>'.
+		                '<li><a href=""><i class="fa fa-calendar-o"></i> <span>Citas</span></a></li>'.
 
-		                '<li><a href="quienesomos.php"><i class="fa fa-user"></i> <span>Archivo</span></a></li>'.
+		                '<li><a href=""><i class="fa fa-archive"></i> <span>Archivo</span></a></li>'.
 
-		                '<li><a href=""><i class="fa fa-bar-chart-o"></i> <span>Enfermería</span></a></li>'.
+		                '<li><a href="system.php?page=enfermeria"><i class="fa fa-medkit"></i> <span>Enfermería</span></a></li>'.
 
-		                '<li><a href="mapa.php"><i class="fa fa-map-marker"></i> <span>Doctores</span></a></li>'.
+		                '<li><a href="system.php?page=listar_medicos"><i class="fa fa-user-md"></i> <span>Medicos</span></a></li>'.
 
-		                '<li><a href=""><i class="fa fa-file-text"></i> <span>Administrar</span></a></li>'.
+		                '<li><a href="system.php?page=listar_usuarios"><i class="fa fa-user-circle-o"></i> <span>Administrar</span></a></li>'.
 
 		                '<li><a href="logout.php"><i class="fa fa-sign-in"></i> <span>Cerrar Sesión</span></a></li>'.
 
@@ -94,9 +94,9 @@ function Encabezado(){
 	            '<!--toggle button end-->'.
 
 	            '<!--search start-->'.
-	            '<form class="searchform" action="index.html" method="post">'.
-	                '<input type="text" class="form-control" name="keyword" placeholder="Buscar aqui..." />'.
-	            '</form>'.
+	            '<!--<form class="searchform" action="index.html" method="post">-->'.
+	                '<!--<input type="text" class="form-control" name="keyword" placeholder="Buscar aqui..." />-->'.
+	            '<!--</form>-->'.
 
 	            '<!--search end-->'.
 
@@ -124,4 +124,42 @@ function Encabezado(){
 	        '<!-- header section end-->';
 }
 
+function EncabezadoAdministrar(){
+	return  '<!-- page heading end-->'.
+		'<div class="wrapper">'.
+			'<div class="row">'.
+			  '<div class="col-lg-12">'.
+				'<section class="panel">'.
+	                        '<header class="panel-heading custom-tab dark-tab">'.
+	                           ' <ul class="nav nav-tabs">'.
+	                                '<li>'.
+	                                    '<a  href="system.php?page=dashboard">'.
+	                                        '<i class="fa fa-home"></i>'.
+	                                    '</a>'.
+	                                '</li>'.
+	                                '<li>'.
+	                                   ' <a  href="system.php?page=listar_usuarios">'.
+	                                        '<i class="fa fa-user"></i>'.
+	                                        'USUARIOS'.
+	                                    '</a>'.
+	                               ' </li>'.
+	                                '<li class="">'.
+	                                    '<a  href="system.php?page=listar_facultades">'.
+	                                        '<i class="fa fa-university "></i>'.
+	                                        'FACULTADES'.
+	                                   ' </a>'.
+	                                '</li>'.
+	                                '<li class="">'.
+	                                    '<a href="system.php?page=listar_carrera">'.
+	                                        '<i class="fa fa-flask"></i>'.
+	                                        'CARRERAS'.
+	                                    '</a>'.
+	                                '</li>'.
+	                            '</ul>'.
+	                        '</header>'.
+	            '</section>'.
+	       ' </div>'.
+	    '</div>'.
+	'</div>';
+}
 ?>

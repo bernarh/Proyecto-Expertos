@@ -210,20 +210,30 @@ hr {
 
 .logo a {
     font-size: 28px;
+
     color: #fff;
     margin: 0 0 0 20px;
     text-decoration: none;
     display: inline-block;
 }
-
+.logo-icon .img-responsive{
+    height: 50px;
+    width: 50px;
+}
 .logo-icon {
     display: none;
+
 }
+
 
 .left-side-collapsed .logo-icon {
     height: 45px;
     margin-top: -48px;
     display: block !important;
+}
+.img-responsive{
+    height: 55px;
+    width: 180px;
 }
 
 .left-side-inner {
@@ -1731,72 +1741,6 @@ ul.user-states li {
 
 .badge.badge-inverse {
     background: #2A3542;
-}
-
-/*--------------------------------
-        CAROUSEL STYLES
----------------------------------*/
-
-.carousel-indicators li {
-    background: rgba(0, 0, 0, 0.2);
-    border: none;
-    transition: background-color 0.25s ease 0s;
-    -moz-transition: background-color 0.25s ease 0s;
-    -webkit-transition: background-color 0.25s ease 0s;
-}
-
-.carousel-indicators .active {
-    background: #333;
-    height: 10px;
-    margin: 1px;
-    width: 10px;
-}
-
-.carousel-indicators.out {
-    bottom: -5px;
-}
-
-.carousel-indicators.out {
-    bottom: -5px;
-}
-
-.carousel-control {
-    color: #999999;
-    text-shadow: none;
-    width: 45px;
-}
-
-.carousel-control i {
-    display: inline-block;
-    height: 25px;
-    left: 50%;
-    margin-left: -10px;
-    margin-top: -10px;
-    position: absolute;
-    top: 50%;
-    width: 20px;
-    z-index: 5;
-}
-
-.carousel-control.left, .carousel-control.right {
-    background: none;
-    filter: none;
-}
-
-.carousel-control:hover, .carousel-control:focus {
-    color: #CCCCCC;
-    opacity: 0.9;
-    text-decoration: none;
-}
-
-.carousel-inner h3 {
-    font-weight: 300;
-    font-size: 16px;
-    margin: 0;
-}
-
-.carousel-inner {
-    margin-bottom: 15px;
 }
 
 /* --------------------------------
@@ -4228,14 +4172,7 @@ ul.labels-info li a:hover, ul.labels-info li a:focus {
     padding-right: 10px;
 }
 
-.carousel-indicators li {
-    /*background: rgba(255, 255, 255, 0.5);*/
-    border: none;
-}
 
-.carousel-indicators {
-    margin-bottom: 10px;
-}
 
 blockquote {
     margin-left: 50px;
@@ -4404,9 +4341,7 @@ ol.comment-list {
 }
 
 
-.blog .carousel-indicators.out {
-    bottom: 15px;
-}
+
 
 
 /*panel*/
@@ -5375,4 +5310,57 @@ ul.iconic-list li a:hover, ul.iconic-list li.active a {
     border-bottom: none;
     margin-bottom: 0;
     padding-bottom: 0;
+}
+
+
+/* CUSTOMIZE THE NAVBAR
+-------------------------------------------------- */
+
+/* Special class on .container surrounding .navbar, used for positioning it into place. */
+.navbar-wrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 20;
+}
+
+/* Flip around the padding for proper display in narrow viewports */
+.navbar-wrapper > .container {
+  padding-right: 0;
+  padding-left: 0;
+}
+.navbar-wrapper .navbar {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+.navbar-wrapper .navbar .container {
+  width: auto;
+}
+
+
+/* CUSTOMIZE THE CAROUSEL
+-------------------------------------------------- */
+
+/* Carousel base class */
+.carousel {
+  height: 500px;
+  margin-bottom: 60px;
+}
+/* Since positioning the image, we need to help out the caption */
+.carousel-caption {
+  z-index: 10;
+}
+
+/* Declare heights because of positioning of img element */
+.carousel .item {
+  height: 500px;
+  background-color: #777;
+}
+.carousel-inner > .item > img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  height: 500px;
 }
