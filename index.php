@@ -22,9 +22,9 @@
 <body class="login-body">
 <div class="container">
 
-    <form class="form-signin" action="Backend/validar.php" method="post">
+    <form class="form-signin" action="validar.php" method="post">
         <div class="form-signin-heading text-center">
-            <h1 class="sign-title">Login</h1>
+            <h1 class="sign-title">Clinica</h1>
             <img src="images/login-logo.png" alt=""/>
         </div>
         <div class="login-wrap">
@@ -35,12 +35,12 @@
                 <i class="fa fa-check"></i>
             </button>
 
-            <div class="registration">
+           <!-- <div class="registration">
                ¿No eres miembro?
                 <a class="" href="registrarse.php">
                     Registrate
                 </a>
-            </div>
+            </div> -->
             <label class="checkbox">
                 <input type="checkbox" value="remember-me"> Recuérdame
                 <span class="pull-right">

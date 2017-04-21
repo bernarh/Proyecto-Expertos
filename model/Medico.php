@@ -65,6 +65,24 @@ class Medico{
 		return $link->executeQuery("SELECT count(*) FROM tbl_medicos");
 	}
 
+	public function buscarMedico($link,$id){
+		return $link->executeQuery("SELECT * FROM tbl_medicos WHERE id_medico = $id");
+	}
+	public function citaMedica($link) {
+		return $link->executeQuery(sprintf("SELECT A.nombres , D.nombre_cita , C.nombre_medico , B.fecha ,							B.id_cita
+									FROM tbl_pacientes A
+									INNER JOIN tbl_citas B
+									ON(A.nro_cuenta = B.nro_cuenta)
+									INNER JOIN tbl_medicos C
+									ON(B.id_medico = C.id_medico)
+									INNER JOIN tbl_tipo_citas D
+									ON(B.id_tipo_cita = D.id_tipo_cita) WHERE B.estado = %d",1 ));
+	}
+
+	public function finalizarCita($link,$id_cita){
+		return$link->executeNonQuery(sprintf("UPDATE tbl_citas SET estado = %d WHERE id_cita =%d" ,2,$id_cita));
+	}
+
 
 }
 

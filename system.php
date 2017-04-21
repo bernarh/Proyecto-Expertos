@@ -100,8 +100,18 @@ include('menu.php');
 						include_once ("pages/eliminar_facultad.php");
 					else if ($_GET ["page"] == "eliminar_tipo_usuario")
 						include_once ("pages/eliminar_tipo_usuario.php");
+					else if ($_GET ["page"] == "medico")
+						include_once ("pages/insertar_medico.php");
+					else if ($_GET ["page"] == "tipo")
+						include_once ("pages/insertar_tipo_medico.php");
+					else if ($_GET ["page"] == "vista")
+						include_once ("pages/vista_medico.php");
+					else if ($_GET ["page"] == "listamedicos")
+						include_once ("pages/listar_medicos.php");
+					else if ($_GET ["page"] == "actualizarM")
+						include_once ("pages/actualizar_medico.php");
 					else {
-						include_once ("pages/editar_componentes.php");
+						include_once ("pages/dashboard.php");
 					}
 				} else {
 					header ( "Location: index.php" );

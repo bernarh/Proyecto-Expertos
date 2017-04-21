@@ -72,6 +72,8 @@ function menu(){
 
 		                '<li><a href="system.php?page=listar_medicos"><i class="fa fa-user-md"></i> <span>Medicos</span></a></li>'.
 
+		                '<li><a href="system.php?page=vista"><i class="fa fa-users"></i> <span>Datos Pacientes</span></a></li>'.
+
 		                '<li><a href="system.php?page=listar_usuarios"><i class="fa fa-user-circle-o"></i> <span>Administrar</span></a></li>'.
 
 		                '<li><a href="logout.php"><i class="fa fa-sign-in"></i> <span>Cerrar Sesión</span></a></li>'.
