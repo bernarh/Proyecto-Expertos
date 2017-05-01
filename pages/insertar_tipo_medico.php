@@ -1,8 +1,8 @@
 <?php 
-include_once("Medico.php");
-//include("conexion.php");
+include_once("model/Medico.php");
+//include("model/Conexion.php");
 if (isset ( $_POST ['txtNombre'] )) {
-echo "Hola";
+
 $id = -1;
 $nombre = $_POST['txtNombre'];
 

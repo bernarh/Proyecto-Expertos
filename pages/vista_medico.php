@@ -2,23 +2,31 @@
 include("model/Medico.php");
 include("model/Enfermeria.php");
 
-//Datos clinicos
-if(isset($_GET['id_cita'])){
+
+if(isset($_GET['id_cita']) ){
 
       $conexionE = new Conexion();
       $idCita = $_GET['id_cita'];
      
+     //Datos correspondientes de enfermeria a mostrar
       $enfermeria = new Enfermeria();
       $resultEn = $enfermeria->elegirDatos($conexionE,$idCita);
       $row = $conexionE->getRecords($resultEn);
 
+      //Obtener la cita a mostrar
+      $conexionF = new Conexion();
+      $medico = new Medico();
+      $resultF = $medico->mostrarCita($conexionF,$idCita);
+      $rowCita = $conexionF->getRecords($resultF);
+     
  }
 
-//Mostrar citas
+//Mostrar todas las citas del medico 
 
 $conexion = new Conexion();
 $medico = new Medico();
 $resultC = $medico->citaMedica($conexion);
+
 
 
 ?>
@@ -39,7 +47,7 @@ $resultC = $medico->citaMedica($conexion);
   <div class="row">
     <div class="col-md-6">
     <div class="well">
-      <table class="table table">
+      <table class="table table-hover">
         <tr class="success">
           <th>Paciente</th>
           <th>Asunto</th>
@@ -62,11 +70,13 @@ $resultC = $medico->citaMedica($conexion);
 
       </div>
     </div>
+
    <?php if(isset($_GET['id_cita'])){?>
-    <div class="col-md-4">
+
+    <div id="enfermeria" class="col-md-4">
     
       <div class="well">
-      <table class="table table-bordered table-hover">
+      <table class="table table-hover">
         <thead >
           <th class="success" colspan="2">Datos clinicos</th>
         </thead>
@@ -93,36 +103,18 @@ $resultC = $medico->citaMedica($conexion);
       </table>
       </div>
       <div>
-          <input type="submit" name="btnFinalizar" id="btnFinalizar"  value="Finalizar">
-          <!--<button name="btnFinalizar" id="btnFinalizar" onclick="desabilitar();" >Finalizar</button>  -->
-          
+          <a href="pages/finalizarCita.php?id_cita=<?php echo $rowCita['id_cita']; ?>" class="btn btn-success btn-sm" >Finalizar</a>
+
       </div>
     </div>
    <?php } ?> 
   </div>
 </div>
 
+
 <script type="text/javascript">
 
-var boton = document.getElementById("btnFinalizar");
 
- var desabilitar = function(){
-  alert("hola :");
-    <?php
-    alert("jaja :");
-      include("Medico.php");
-      $id_cita =$_GET['id_cita'];
-      echo "id cita ".$_GET['id_cita'];
-      $conexion = new Conexion();
-      $medicoF = new Medico();
-      $medicoF->finalizarCita($conexion,$id_cita);
-
-    ?>
-
-  };
-
-  
-boton.addEventListener("submit",desabilitar);
 
 </script>
 

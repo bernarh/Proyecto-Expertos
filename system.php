@@ -25,11 +25,13 @@ include('menu.php');
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />º
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
   <meta name="keywords" content="admin, dashboard, bootstrap, template, flat, modern, theme, responsive, fluid, retina, backend, html5, css, css3">
   <meta name="description" content="">
 
   <?php echo css(); ?>
+  
 
 
 </head>
@@ -108,6 +110,20 @@ include('menu.php');
 						include_once ("pages/vista_medico.php");
 					else if ($_GET ["page"] == "listamedicos")
 						include_once ("pages/listar_medicos.php");
+
+         //MODIFICADOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+					else if ($_GET ["page"] == "administrarTcita")
+						include_once ("pages/administrar_tipo_cita.php");
+					else if ($_GET ["page"] == "insertar_tipo_cita")
+						include_once ("pages/insertar_tipo_cita.php");
+					else if ($_GET ["page"] == "editar_tipo_cita")
+						include_once ("pages/editar_tipo_cita.php");
+					else if ($_GET ["page"] == "cambiar_e_tcita")
+						include_once ("pages/cambiar_estado_tCita.php");
+					else if ($_GET ["page"] == "insertar_cita")
+						include_once ("pages/insertar_cita.php");
+
+		//MODIFICDOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
 					else if ($_GET ["page"] == "actualizarM")
 						include_once ("pages/actualizar_medico.php");
 					else {

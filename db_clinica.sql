@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.2
+-- version 4.5.1
 -- http://www.phpmyadmin.net
 --
--- Servidor: localhost
--- Tiempo de generación: 21-04-2017 a las 06:27:34
--- Versión del servidor: 10.1.19-MariaDB
--- Versión de PHP: 5.6.24
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 22-04-2017 a las 00:49:54
+-- Versión del servidor: 10.1.10-MariaDB
+-- Versión de PHP: 5.5.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `db_clinica`
+-- Base de datos: `db_clinica2`
 --
 
 -- --------------------------------------------------------
@@ -65,7 +65,11 @@ CREATE TABLE `tbl_citas` (
 --
 
 INSERT INTO `tbl_citas` (`id_cita`, `id_tipo_cita`, `nro_cuenta`, `fecha`, `estado`, `id_medico`) VALUES
-(1, 1, '123', '2017-04-18', 1, 1);
+(1, 1, '123', '2017-04-18', 1, 1),
+(2, 2, '2012', '2017-04-21', 1, 1),
+(3, 3, '2013', '2017-04-21', 1, 2),
+(4, 1, '2015', '2017-04-21', 1, 2),
+(5, 2, '2016', '2017-04-21', 1, 3);
 
 -- --------------------------------------------------------
 
@@ -87,7 +91,11 @@ CREATE TABLE `tbl_enfermeria` (
 --
 
 INSERT INTO `tbl_enfermeria` (`id_cita`, `temperatura`, `presion`, `pulso`, `peso`, `talla`) VALUES
-(10, 1, 1, 1, 1, 1);
+(1, 23, 55, 67, 43, 89),
+(2, 34, 65, 76, 87, 23),
+(3, 12, 45, 34, 79, 12),
+(4, 56, 65, 12, 24, 32),
+(5, 12, 12, 32, 45, 85);
 
 -- --------------------------------------------------------
 
@@ -156,7 +164,10 @@ CREATE TABLE `tbl_pacientes` (
 --
 
 INSERT INTO `tbl_pacientes` (`nro_cuenta`, `nombres`, `apellidos`, `fecha_nacimiento`, `telefono`, `genero`, `id_carrera`, `estado`) VALUES
-('123', 'sansita', 'asd', '2017-04-19', '1232', 'F', 0, 1);
+('2001559896', 'Roberto', 'Ramirez Lopez', '2017-04-08', '22334455', 'M', 8, 1),
+('20018989223', 'Katherine', 'NuÃ±ez', '2017-04-08', '32225567', 'F', 2, 1),
+('2012', 'maria', 'suarez', '2017-04-21', '235345', 'F', 1, 1),
+('2013', 'carlos', 'jimenez', '2016-11-15', '32342494', 'M', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -175,7 +186,9 @@ CREATE TABLE `tbl_tipo_citas` (
 
 INSERT INTO `tbl_tipo_citas` (`id_tipo_cita`, `nombre_cita`) VALUES
 (1, 'CITA 1'),
-(2, 'CITA 2');
+(2, 'CITA 2'),
+(3, 'CITA3'),
+(4, 'CITA4');
 
 -- --------------------------------------------------------
 
@@ -194,7 +207,9 @@ CREATE TABLE `tbl_tipo_medicos` (
 
 INSERT INTO `tbl_tipo_medicos` (`id_tipo_medico`, `nombre_tipo_medico`) VALUES
 (1, 'GENERAL'),
-(2, 'ODONTOLOGO');
+(2, 'ODONTOLOGO'),
+(3, 'GINECOLOGIA'),
+(4, 'VIH');
 
 -- --------------------------------------------------------
 
@@ -244,7 +259,7 @@ INSERT INTO `tbl_usuario` (`id_usuario`, `id_tipo_usuario`, `usuario`, `password
 (5, 1, 'asd', '1234asdf', 1),
 (6, 1, 'asd', 'asdf1234', 2),
 (7, 1, 'asdf', '12345678', 1),
-(8, 1, 'guty', 'Ã±llllllll', 1),
+(8, 1, 'guty', 'asdf1234', 1),
 (9, 2, 'roger', 'asdf1234', 1),
 (10, 1, 'bernardo', 'asdf1234', 1),
 (11, 3, 'edwin', 'asdf1234', 1),
@@ -264,6 +279,12 @@ ALTER TABLE `tbl_carreras`
 -- Indices de la tabla `tbl_citas`
 --
 ALTER TABLE `tbl_citas`
+  ADD PRIMARY KEY (`id_cita`);
+
+--
+-- Indices de la tabla `tbl_enfermeria`
+--
+ALTER TABLE `tbl_enfermeria`
   ADD PRIMARY KEY (`id_cita`);
 
 --
@@ -321,7 +342,7 @@ ALTER TABLE `tbl_carreras`
 -- AUTO_INCREMENT de la tabla `tbl_citas`
 --
 ALTER TABLE `tbl_citas`
-  MODIFY `id_cita` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_cita` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT de la tabla `tbl_facultades`
 --
@@ -336,12 +357,12 @@ ALTER TABLE `tbl_medicos`
 -- AUTO_INCREMENT de la tabla `tbl_tipo_citas`
 --
 ALTER TABLE `tbl_tipo_citas`
-  MODIFY `id_tipo_cita` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_tipo_cita` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `tbl_tipo_medicos`
 --
 ALTER TABLE `tbl_tipo_medicos`
-  MODIFY `id_tipo_medico` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_tipo_medico` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `tbl_tipo_usuario`
 --

@@ -18,10 +18,11 @@
      $carrera= $_POST['id_carrera'];
      $estado= 1;
      
-     echo ($_POST['id_carrera']);
+     
      $conexion= new Conexion();
     $paciente= new Paciente($nro_cuenta,$nombres,$apellidos,$fecha_nacimiento,$telefono,$genero,$carrera,$estado );
     $paciente->insertarPaciente($conexion); 
+    echo " <script>alert('Paciente Ingresado con exito!');</script>";
 
     
 
@@ -51,7 +52,7 @@
 		<div class="form-group">
 			<label class="col-xs-2 control-label">Numero de Cuenta:</label>
 			<div class="col-xs-4">
-				<input type="text" class="form-control" name="nro_cuenta" />
+				<input type="text" class="form-control" maxlength="11" minlength="8"name="nro_cuenta" />
 			</div>	
 		</div>
 
@@ -102,6 +103,7 @@
 			<label class="col-xs-2 control-label">Facultad:</label>
 			<div class="col-xs-4">
 				<select id="id_facultad" name="id_facultad">
+				<option value="">--Seleccione la Facultad--</option>
 					<?php 
 					while ($rowFacultad=$conexion->getRecords($restulFacultades)) { ?>
 					  <option  value="<?php echo( $rowFacultad['id_facultad'] );?>" ><?php echo $rowFacultad['nombre_facultad']?>
@@ -137,6 +139,7 @@
 
 	</div>
 <script src="js/jquery.min.js"></script>
+
 <script type="text/javascript">
 $(document).ready(function(){
 

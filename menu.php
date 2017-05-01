@@ -62,15 +62,22 @@ function menu(){
 		                '<li><a href="system.php?page=dashboard"><i class="fa fa-home"></i> <span>Inicio</span></a>'.
 		                '</li>'.
 		                
-		                '<li><a href=""><i class="fa fa-television"></i> <span> Ver TV</span></a></li>'.
+		                '<li><a href="pages/tv.php"><i class="fa fa-television"></i> <span> Ver TV</span></a></li>'.
 		                
-		                '<li><a href=""><i class="fa fa-calendar-o"></i> <span>Citas</span></a></li>'.
+		               
 
-		                '<li><a href=""><i class="fa fa-archive"></i> <span>Archivo</span></a></li>'.
+		                '<li><a href="system.php?page=paciente"><i class="fa fa-archive"></i> <span>Archivo</span></a></li>'.
+		                '<li><a href="system.php?page=insertar_cita"><i class="fa fa-archive"></i> <span>Citas</span></a></li>'.
+
+		                '<li><a href="system.php?page=administrarTcita"><i class="fa fa-tablet"></i> <span>Administrar Tipo Cita</span></a></li>'.
+
+		                '<li><a href="system.php?page=insertar"><i class="fa fa-tablet"></i> <span>Tablet</span></a></li>'.
+
 
 		                '<li><a href="system.php?page=enfermeria"><i class="fa fa-medkit"></i> <span>Enfermería</span></a></li>'.
 
 		                '<li><a href="system.php?page=listar_medicos"><i class="fa fa-user-md"></i> <span>Medicos</span></a></li>'.
+
 
 		                '<li><a href="system.php?page=vista"><i class="fa fa-users"></i> <span>Datos Pacientes</span></a></li>'.
 

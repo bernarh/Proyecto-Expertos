@@ -35,8 +35,11 @@ class Paciente
 
 	public function insertarPaciente($link)
 	{
-		return $link->executeNonQuery(sprintf("INSERT INTO tbl_pacientes(nro_cuenta,nombres,apellidos,fecha_nacimiento,telefono,genero,id_carrera,estado)VALUES('%d','%s','%s','%s','%s','%s','%d','%d')",$this->nro_Cuenta,$this->nombres,$this->apellidos,$this->fecha_nacimiento,$this->telefono, $this->genero, $this->id_carrera, $this->estado)); 
+		return $link->executeNonQuery(sprintf("INSERT INTO tbl_pacientes(nro_cuenta,nombres,apellidos,fecha_nacimiento,telefono,genero,id_carrera,estado)VALUES('%s','%s','%s','%s','%s','%s',%d,%d)",$this->nro_Cuenta,$this->nombres,$this->apellidos,$this->fecha_nacimiento,$this->telefono, $this->genero, $this->id_carrera, $this->estado)); 
+
+		
 	}
+
 
 	
 

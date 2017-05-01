@@ -10,11 +10,11 @@
 		$resultCarrera= $carrera->listasCarreras($conexion,$_POST['id_facultad']);
 		if($resultCarrera->num_rows>0)
 		{
-			$html.='';
+			$html.=' <option value="">--Seleccione la Carrera--</option>';
 
 			while($row = $conexion->getRecords($resultCarrera))
 				{
-					$html.='<option value"'.$row['id_carrera'].'">'.$row['nombre_carrera'].'</option>';
+					$html.='<option value="'.$row['id_carrera'].'">'.$row['nombre_carrera'].'</option>';
 
 				}
 
