@@ -26,5 +26,13 @@ class Enfermeria{
 		return $link->executeQuery(sprintf("SELECT * FROM tbl_enfermeria WHERE id_cita =%d",$id));
 	}
 
+	public function agregarCita($cita){
+		array_push($this->listaEnfermeria, $cita);
+	}
+
+	public function pasarCita(){
+		return $cita = array_shift($this->listaEnfermeria);
+	}
+
 }
 ?>

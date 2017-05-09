@@ -42,6 +42,7 @@ function scripts(){
 }
 
 function menu(){
+	if ($_SESSION['id_tipo_usuario']==1){
 	return '<!-- left side start-->'.
 		    '<div class="sticky-left-side left-side">'.
 
@@ -64,24 +65,18 @@ function menu(){
 		                
 		                '<li><a href="pages/tv.php"><i class="fa fa-television"></i> <span> Ver TV</span></a></li>'.
 		                
-		               
+		                '<li><a href="system.php?page=insertar_cita"><i class="fa fa-calendar-o"></i> <span>Citas</span></a></li>'.
 
-		                '<li><a href="system.php?page=paciente"><i class="fa fa-archive"></i> <span>Archivo</span></a></li>'.
-		                '<li><a href="system.php?page=insertar_cita"><i class="fa fa-archive"></i> <span>Citas</span></a></li>'.
-
-		                '<li><a href="system.php?page=administrarTcita"><i class="fa fa-tablet"></i> <span>Administrar Tipo Cita</span></a></li>'.
-
-		                '<li><a href="system.php?page=insertar"><i class="fa fa-tablet"></i> <span>Tablet</span></a></li>'.
-
+		                '<li><a href=""><i class="fa fa-archive"></i> <span>Archivo</span></a></li>'.
 
 		                '<li><a href="system.php?page=enfermeria"><i class="fa fa-medkit"></i> <span>Enfermería</span></a></li>'.
 
 		                '<li><a href="system.php?page=listar_medicos"><i class="fa fa-user-md"></i> <span>Medicos</span></a></li>'.
 
-
-		                '<li><a href="system.php?page=vista"><i class="fa fa-users"></i> <span>Datos Pacientes</span></a></li>'.
-
+		                
 		                '<li><a href="system.php?page=listar_usuarios"><i class="fa fa-user-circle-o"></i> <span>Administrar</span></a></li>'.
+
+		                '<li><a href="system.php?page=administrarTcita"><i class="fa fa-folder-open"></i> <span>Administrar Tipo Cita</span></a></li>'.
 
 		                '<li><a href="logout.php"><i class="fa fa-sign-in"></i> <span>Cerrar Sesión</span></a></li>'.
 
@@ -91,6 +86,107 @@ function menu(){
 		        '</div>'.
 		   ' </div>'.
 		    '<!-- left side end-->';
+		   }else if ($_SESSION['id_tipo_usuario']==2){
+		   		return '<!-- left side start-->'.
+		    '<div class="sticky-left-side left-side">'.
+
+		        '<!--logo and iconic logo start-->'.
+		        '<div class="logo">'.
+		          '  <a href="index.php"><img class="img-responsive" src="images/logo.png" alt=""></a>'.
+		        '</div>'.
+
+		        '<div class="logo-icon text-center">'.
+		            '<a href="index.php"><img class="img-responsive" src="images/logo_icon.png" alt=""></a>'.
+		        '</div>'.
+		        '<!--logo and iconic logo end-->'.
+
+		        '<div class="left-side-inner">'.
+
+		            '<!--sidebar nav start-->'.
+		            '<ul class="nav nav-pills nav-stacked custom-nav">'.
+		                '<li><a href="system.php?page=dashboard"><i class="fa fa-home"></i> <span>Inicio</span></a>'.
+		                '</li>'.
+		                
+		                '<li><a href="pages/tv.php"><i class="fa fa-television"></i> <span> Ver TV</span></a></li>'.
+
+		                '<li><a href="system.php?page=vista"><i class="fa fa-users"></i> <span>Datos Pacientes</span></a></li>'.
+		                
+
+		                '<li><a href="logout.php"><i class="fa fa-sign-in"></i> <span>Cerrar Sesión</span></a></li>'.
+
+		            '</ul>'.
+		            '<!--sidebar nav end-->'.
+
+		        '</div>'.
+		   ' </div>'.
+		    '<!-- left side end-->';
+		   }else if ($_SESSION['id_tipo_usuario']==3){
+	return '<!-- left side start-->'.
+		    '<div class="sticky-left-side left-side">'.
+
+		        '<!--logo and iconic logo start-->'.
+		        '<div class="logo">'.
+		          '  <a href="index.php"><img class="img-responsive" src="images/logo.png" alt=""></a>'.
+		        '</div>'.
+
+		        '<div class="logo-icon text-center">'.
+		            '<a href="index.php"><img class="img-responsive" src="images/logo_icon.png" alt=""></a>'.
+		        '</div>'.
+		        '<!--logo and iconic logo end-->'.
+
+		        '<div class="left-side-inner">'.
+
+		            '<!--sidebar nav start-->'.
+		            '<ul class="nav nav-pills nav-stacked custom-nav">'.
+		                '<li><a href="system.php?page=dashboard"><i class="fa fa-home"></i> <span>Inicio</span></a>'.
+		                '</li>'.
+		                '<li><a href="pages/tv.php"><i class="fa fa-television"></i> <span> Ver TV</span></a></li>'.
+		                
+		                '<li><a href="system.php?page=enfermeria"><i class="fa fa-medkit"></i> <span>Enfermería</span></a></li>'.
+		                '<li><a href="logout.php"><i class="fa fa-sign-in"></i> <span>Cerrar Sesión</span></a></li>'.
+
+		            '</ul>'.
+		            '<!--sidebar nav end-->'.
+
+		        '</div>'.
+		   ' </div>'.
+		    '<!-- left side end-->';
+		   }else if ($_SESSION['id_tipo_usuario']==4){
+	return '<!-- left side start-->'.
+		    '<div class="sticky-left-side left-side">'.
+
+		        '<!--logo and iconic logo start-->'.
+		        '<div class="logo">'.
+		          '  <a href="index.php"><img class="img-responsive" src="images/logo.png" alt=""></a>'.
+		        '</div>'.
+
+		        '<div class="logo-icon text-center">'.
+		            '<a href="index.php"><img class="img-responsive" src="images/logo_icon.png" alt=""></a>'.
+		        '</div>'.
+		        '<!--logo and iconic logo end-->'.
+
+		        '<div class="left-side-inner">'.
+
+		            '<!--sidebar nav start-->'.
+		            '<ul class="nav nav-pills nav-stacked custom-nav">'.
+		                '<li><a href="system.php?page=dashboard"><i class="fa fa-home"></i> <span>Inicio</span></a>'.
+		                '</li>'.
+		                '<li><a href="pages/tv.php"><i class="fa fa-television"></i> <span> Ver TV</span></a></li>'.
+		                '<li><a href="system.php?page=insertar"><i class="fa fa-archive"></i> <span>Archivo</span></a></li>'.
+		                '<li><a href="system.php?page=insertar_cita"><i class="fa fa-calendar-o"></i> <span>Citas</span></a></li>'.
+		                 '<li><a href="system.php?page=paciente"><i class="fa fa-archive"></i> <span>Pacientes</span></a></li>'.
+		                '<li><a href="logout.php"><i class="fa fa-sign-in"></i> <span>Cerrar Sesión</span></a></li>'.
+
+
+		            '</ul>'.
+		            '<!--sidebar nav end-->'.
+
+		        '</div>'.
+		   ' </div>'.
+		    '<!-- left side end-->';
+		   }else{
+		   		return null;
+		   }
 }
 
 function Encabezado(){
@@ -162,6 +258,12 @@ function EncabezadoAdministrar(){
 	                                    '<a href="system.php?page=listar_carrera">'.
 	                                        '<i class="fa fa-flask"></i>'.
 	                                        'CARRERAS'.
+	                                    '</a>'.
+	                                '</li>'.
+	                                 '<li class="">'.
+	                                    '<a href="system.php?page=reporte_citas">'.
+	                                        '<i class="fa fa-line-chart"></i>'.
+	                                        'REPORTE CITAS DIARIAS'.
 	                                    '</a>'.
 	                                '</li>'.
 	                            '</ul>'.

@@ -10,6 +10,7 @@ if (isset ( $_GET ['id'] )) {
     //insertando
 	$facultad = new Facultad ( $id,-1);
 	$facultad->deleteFacultad ( $conexion );
+	$facultad->limpiarCarreras ( $conexion );
 	//mensaje de insertado y redireccionando a pagina principal
 	$conexion->close();
 	echo "<script> alert ('Facultad Eliminada Con Exito');</script>";

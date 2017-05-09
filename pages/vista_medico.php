@@ -2,119 +2,138 @@
 include("model/Medico.php");
 include("model/Enfermeria.php");
 
+//Codigo para mostrar los datos de enfermeria de la cita especifica que se esta          atendiendo
 
-if(isset($_GET['id_cita']) ){
 
-      $conexionE = new Conexion();
-      $idCita = $_GET['id_cita'];
-     
-     //Datos correspondientes de enfermeria a mostrar
-      $enfermeria = new Enfermeria();
-      $resultEn = $enfermeria->elegirDatos($conexionE,$idCita);
-      $row = $conexionE->getRecords($resultEn);
+//echo "cita ".$_GET['id_cita'];
 
-      //Obtener la cita a mostrar
-      $conexionF = new Conexion();
-      $medico = new Medico();
-      $resultF = $medico->mostrarCita($conexionF,$idCita);
-      $rowCita = $conexionF->getRecords($resultF);
-     
- }
 
-//Mostrar todas las citas del medico 
+//Mostrar todas las citas del medico de entrada
+$idUsuario=$_SESSION['id'];
 
 $conexion = new Conexion();
 $medico = new Medico();
-$resultC = $medico->citaMedica($conexion);
 
+$resultIdM = $medico->obtenerIdMedico($conexion,$idUsuario);
+$rowIdM=$conexion->getRecords($resultIdM);
+$idMedico =$rowIdM['id_medico'];
+//echo "Id :".$rowIdM['id_medico'];
+
+$resultC = $medico->citaMedicaEntrada($conexion,$idMedico);
+//$rowCitas = $conexion->getRecords($resultC);
 
 
 ?>
+
+
+<title>Vista Medica</title>
 
 
 <div class="container">
   <div class="row">
     <div class="col-md-10">
     <div class="well">
-      <h1>Atencion clinica</h1>
+      <h1>Atención clinica</h1>
     </div>
     </div>
     
   </div>
    
 </div>
+
 <div class="container">
   <div class="row">
     <div class="col-md-6">
     <div class="well">
+    <!-- Tabla que contiene todas las citas de un doctor espacifico -->
+    <div class="card-content table-responsive">
       <table class="table table-hover">
         <tr class="success">
-          <th>Paciente</th>
-          <th>Asunto</th>
-          <th>Medico</th>
-          <th>Fecha</th>
+          <th>No. Cuenta</th>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Fecha de Nacimiento</th>
+          <th>Carrera</th>
         </tr>
-      <?php while ($rowCitas = $conexion->getRecords($resultC)) {  ?>
+      <?php $contador=0;
+      while ($rowCitas = $conexion->getRecords($resultC)) {  $contador++; ?>
               
         <tr>
+          <td><?php echo $rowCitas['nro_cuenta']; ?></td>
           <td><?php echo $rowCitas['nombres']; ?></td>
-          <td><?php echo $rowCitas['nombre_cita']; ?></td>
-          <td><?php echo $rowCitas['nombre_medico']; ?></td>
-          <td><?php echo $rowCitas['fecha'] ?></td>
-          <td><a href="system.php?page=vista&id_cita=<?php echo $rowCitas['id_cita']; ?>">mostrar datos</a></td>
+          <td><?php echo $rowCitas['apellidos']; ?></td>
+          <td><?php echo $rowCitas['fecha_nacimiento'] ?></td>
+          <td><?php echo $rowCitas['nombre_carrera'] ?></td>
+          <td><a id="a<?php echo $contador; ?>" href="javascript:llamar(<?php echo $rowCitas['id_cita']; ?>,<?php echo $rowCitas['nro_cuenta']; ?>,'<?php echo $rowCitas['nombres']; ?>','<?php echo $contador;?>')" >llamar y mostrar</a></td>
 
         </tr>
      <?php } ?>  
 
       </table>
-
+      </div>
       </div>
     </div>
 
-   <?php if(isset($_GET['id_cita'])){?>
-
-    <div id="enfermeria" class="col-md-4">
-    
-      <div class="well">
-      <table class="table table-hover">
-        <thead >
-          <th class="success" colspan="2">Datos clinicos</th>
-        </thead>
-        <tr>
-          <th>Temperatura :</th>
-          <td><?php echo $row['temperatura'].' '.'°C'; ?></td>
-        </tr>
-        <tr>
-          <th>Precion :</th>
-          <td><?php echo $row['presion'].' '.'mmHg'; ?></td>
-        </tr>
-        <tr>
-          <th>Pulso :</th>
-          <td><?php echo $row['pulso'].' '.'Fr/m'; ?></td>
-        </tr>
-        <tr>
-          <th>Talla :</th>
-          <td><?php echo $row['talla'].' '.'cm'; ?></td>
-        </tr>
-        <tr>
-          <th>Peso :</th>
-          <td><?php echo $row['peso'].' '.'kg'; ?></td>
-        </tr>
-      </table>
-      </div>
-      <div>
-          <a href="pages/finalizarCita.php?id_cita=<?php echo $rowCita['id_cita']; ?>" class="btn btn-success btn-sm" >Finalizar</a>
-
-      </div>
-    </div>
-   <?php } ?> 
+  <!-- Tabla que contiene los datos tomados en enfermeria del paciente que se esta atendiendo -->
+  <div id="mostrar_detalle"></div>
+   
   </div>
 </div>
-
-
+<script src="./js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
 
+function llamar(id_cita,nro_cuenta,nombres,contador){
+    var element = document.getElementById('a'+contador);
+    element.removeAttribute('href');
+    var parametros = "id_cita="+id_cita+"&nro_cuenta="+nro_cuenta+"&nombres="+nombres;
+       $.ajax({
+          type: "POST",
+          url: "./pages/detalle_citas.php",
+          data: parametros,
+           beforeSend: function(objeto){
+            $("#mostrar_detalle").html("Mensaje: Cargando...");
+            },
+          success: function(datos){
+          $("#mostrar_detalle").html(datos);
+            
+          }
+      });
+      
+     
+    };
+/* $('a.current-page').click(function() { 
+  return false; 
+});*/ 
 
+ function clickAndDisable(link) {
+     // disable subsequent clicks
+     link.onclick = function(event) {
+        event.preventDefault();
+     }
+   }   
+/*
+$(document).ready(function(){
+
+  $('#btn_finalizar').click(function(){
+    var id=$('#id_cita').val();
+    var confirmar= confirm("Este paciente ya no podrÃ¡ pasar con ningun mÃ©dico si finaliza esta cita. Â¿EstÃ¡ seguro que desea finalizar esta cita?");
+    if(confirmar){
+      $.ajax({
+        url: "funciones.php",
+        method: "POST",
+        data: {condicion:"finalizar",
+            id_cita: id},
+        dataType: "text",
+        success: function(data){
+        
+          alert("Se ha finalizado esta cita");
+          window.location="system.php?page=enfermeria";
+        }
+      });
+
+    }
+  });
+});*/
 
 </script>
 

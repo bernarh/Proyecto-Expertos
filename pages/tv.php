@@ -1,3 +1,10 @@
+<?php 
+include('../model/Conexion.php');
+
+if(!isset($_SESSION)){
+    session_start();
+  }
+?>
 <!DOCTYPE html>
 <html lang="esp">
 
@@ -17,6 +24,7 @@
     <!-- Custom CSS -->
     <link href="../css/portfolio-item.css" rel="stylesheet">
 
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -30,7 +38,7 @@
 
 
     <!-- Page Content -->
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-lg-9">
                 <img src="../images/baner.jpg" style="height: 120px; margin-top: 30px;">
@@ -57,57 +65,29 @@
         <!-- Portfolio Item Row -->
         <div class="row">
 
-            <div class="col-md-8">
-                <h1>
-                     <table class="table table-striped" ">
-                        <tr>
-                            <th >Cuenta</th>
-                            <th >Estudiante</th>
-                            <th >Sala</th>
-                        </tr>
-                        <tr>
-                            <td >20121000212</td>
-                            <td >Estudiante 1</td>
-                            <td >02</td>
-                        </tr>
-                         <tr>
-                            <td >20121000212</td>
-                            <td >Estudiante 2</td>
-                            <td >03</td>
-                        </tr>
-                         <tr>
-                            <td >20121000212</td>
-                            <td >Estudiante 3</td>
-                            <td >04</td>
-                        </tr>
-                         <tr>
-                            <td >20121000212</td>
-                            <td >Estudiante 4</td>
-                            <td >05</td>
-                        </tr>
-                         <tr>
-                            <td >20121000212</td>
-                            <td >Estudiante 1</td>
-                            <td >02</td>
-                        </tr>
-                    
-                </table>
-                </h1>
+            <div id="recargado" class="col-md-6">
+                
               
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-6">
+               
                 <div class="row">
+                    <video autoplay controls preload loop style="height: 400px;  ">
+                        <source src="../images/spot.mp4" type="video/mp4">
+                        <source src="../images/spot2.mp4" type="video/mp4">
+                        <source src="../images/spot3.mp4" type="video/mp4">
+                    </video>
+                </div>
+
+                 <div class="row">
                     <h3>Instrucciones</h3>
                 <ul>
-                    <li>Lorem Ipsum</li>
-                    <li>Dolor Sit Amet</li>
-                    <li>Consectetur</li>
-                    <li>Adipiscing Elit</li>
+                    <li>Regístrate en la Tablet</li>
+                    <li>Pasa al area de archivo para llenar tus datos con tu forma 03</li>
+                    <li>Espera a ser llamado en el TV</li>
+                    
                 </ul>
-                </div>
-                <div class="row">
-                    <video></video>
                 </div>
                 
             </div>
@@ -129,7 +109,8 @@
         <footer>
             <div class="row">
                 <div class="col-lg-12">
-                    <p>Copyright &copy; Your Website 2014</p>
+                    <p class="pull-right"><a type="button" class="btn btn-info" href="../index.php" >Inicio</a></p>
+                    <p>Copyright &copy; INGENIERÍA EN SISTEMAS - UNAH 2017 - Privacy - Terms</p>
                 </div>
             </div>
             <!-- /.row -->
@@ -139,10 +120,28 @@
     <!-- /.container -->
 
     <!-- jQuery -->
-    <script src="js/jquery.js"></script>
+    <script src="../js/jquery.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script language="javascript" src="../js/jquery-1.10.2.min.js"></script>
+
+    <script language="javascript">
+        $(document).ready( function(){
+            refresh();
+            $('#recargado').load('../actualizarTv.php');
+
+        });
+
+
+        function refresh(){    
+               setTimeout( function(){
+                    $('#recargado').fadeOut('slow').load('../actualizarTv.php').fadeIn('slow');
+                    refresh();
+               }, 10000 );     
+        }
+</script>
+
 
 </body>
 

@@ -16,7 +16,7 @@ class Usuario {
 	}
 	
 	public function insertNuevoUsuario($link) {
-		return $link->executeNonQuery ( sprintf ( "INSERT INTO tbl_usuario(id_tipo_usuario, usuario, password,estado_usuario) VALUES (%d, '%s', '%s',1)", $this->idTipoUsuario, $this->usuario, $this->password));
+		return $link->executeNonQuery ( sprintf ( "INSERT INTO tbl_usuario(id_tipo_usuario, usuario, password,estado_usuario,estado_asignado) VALUES (%d, '%s', '%s',1,0)", $this->idTipoUsuario, $this->usuario, $this->password));
 	}
 	
 	public function updateUsuario($link) {

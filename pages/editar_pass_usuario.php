@@ -24,7 +24,7 @@ if (isset ( $_POST ['txtUsuario'] )) {
 	}else if (strlen($password)<8||strlen($password)>16){
 		$errors[]='la contraseña debe ser mayor que 7 caracteres y menor de 16';
 	}else{
-		$usuario = new Usuario ( $id, $nameUsuario, $tipoUsuario ,$idTipoUsuario, $password );
+		$usuario = new Usuario ( $id, $nameUsuario, $tipoUsuario ,$idTipoUsuario, sha1($password) );
 		$validarUsuario= $usuario->nombreUsuario($conexion);
 		$resultadoUsuario=$conexion->getRecords($validarUsuario);
 			$usuario->updatePassUsuario( $conexion );
@@ -56,13 +56,13 @@ if (isset ( $_POST ['txtUsuario'] )) {
 	<div class="form-group">
 		<label class="col-xs-3 control-label">Password:</label>
 		<div class="col-xs-5">
-			<input type="password" id="txtPassword" name="txtPassword" maxlength="16" minlength="8" autocomplete="off"/>
+			<input type="password" id="txtPassword" name="txtPassword" maxlength="16" minlength="8" autocomplete="off" placeholder="Contraseña Usuario"/>
 		</div>
 	</div>
 	<div class="form-group">
 		<label class="col-xs-3 control-label">Password de Nuevo:</label>
 		<div class="col-xs-5">
-			<input type="password" id="txtPassword2" name="txtPassword2" maxlength="16" minlength="8" autocomplete="off"/>
+			<input type="password" id="txtPassword2" name="txtPassword2" maxlength="16" minlength="8"  placeholder="Repita Contraseña Usuario" autocomplete="off"/>
 		</div>
 	</div>
 	<?php

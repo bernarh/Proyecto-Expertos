@@ -40,6 +40,11 @@ class Paciente
 		
 	}
 
+	//agregue a Paciente
+	public function buscarPaciente($link){
+		return $link->executeQuery("SELECT nro_cuenta FROM tbl_pacientes WHERE estado=1");
+	}
+
 
 	
 

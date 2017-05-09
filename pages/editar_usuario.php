@@ -27,8 +27,8 @@ if (isset ( $_POST ['txtUsuario'] )) {
 			$usuario->updateUsuario( $conexion );
 			$conexion->close();
 			mysqli_free_result($validarUsuario);
-			echo "<script> alert ('Usuario Editado Con Exito');</script>";
-			echo "<script> window.location='system.php?page=listar_usuarios';</script>";
+			$messages[]='Usuario Editado Con Exito';
+			echo "<script> setInterval(window.location='system.php?page=listar_usuarios',3000);</script>";
 		}else{
 			$validarUsuario= $usuario->validarUsuario($conexion);
 			$resultadoUsuario=$conexion->getRecords($validarUsuario);
@@ -36,8 +36,8 @@ if (isset ( $_POST ['txtUsuario'] )) {
 				$usuario->updateUsuario( $conexion );
 				$conexion->close();
 				mysqli_free_result($validarUsuario);
-				echo "<script> alert ('Usuario Editado Con Exito');</script>";
-				echo "<script> window.location='system.php?page=listar_usuarios';</script>";
+				$messages[]='Usuario Editado Con Exito';
+				echo "<script> setInterval(window.location='system.php?page=listar_usuarios',3000);</script>";
 			}else{
 				$errors[]='nombre de usuario ya existe';
 				$conexion->close();
@@ -46,7 +46,30 @@ if (isset ( $_POST ['txtUsuario'] )) {
 		}
 	}
 
-	
+	if (isset($errors)){ ?>
+		<div class="alert alert-danger" role="alert">
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+				<strong>Error!</strong> 
+				<?php
+					foreach ($errors as $error) {
+							echo $error;
+						}
+					?>
+		</div>
+		<?php
+		}
+	if (isset($messages)){ ?>
+				<div class="alert alert-success" role="alert">
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
+						<strong>¡Bien hecho!</strong>
+						<?php
+							foreach ($messages as $message) {
+									echo $message;
+								}
+							?>
+				</div>
+	<?php
+	}
 }
 	$conexion = new Conexion ();
 	$usuario = new Usuario ($_GET['id'],-1,-1,-1,-1);
@@ -55,7 +78,8 @@ if (isset ( $_POST ['txtUsuario'] )) {
 	mysqli_free_result($result);
 ?>
 <div class="col-md-2"></div>
-<h2 class="page-header">Editar Usuario</h4>
+<h2 class="page-header">Editar Usuario</h2>
+<div id="resultado"></div>
 <form id="form1" name="form1" class="form-horizontal" method="post" action="">
 	<input type="hidden" id="txtIdUsuario" name="txtIdUsuario" value="<?php echo $_GET['id']; ?>" />
 	<div class="form-group">
@@ -80,12 +104,6 @@ if (isset ( $_POST ['txtUsuario'] )) {
 			</select>
 		</div>
 	</div>
-	<?php
-			if (isset($errors)){
-				foreach ($errors as $error) {
-					echo $error;
-				}
-			}?>
 	<div class="form-group">
 		<div class="col-xs-3">
 		</div>
@@ -95,3 +113,21 @@ if (isset ( $_POST ['txtUsuario'] )) {
 		</div>
 	</div>
 </form>
+<script type="text/javascript">
+	$("#form1").submit(function( event ) {
+		var parametros = $(this).serialize();
+			 $.ajax({
+					type: "POST",
+					url: "editar_usuario.php",
+					data: parametros,
+					 beforeSend: function(objeto){
+						$("#resultado").html("Mensaje: Cargando...");
+					  },
+					success: function(datos){
+					$("#resultado").html(datos);
+					
+				  }
+			});
+		  event.preventDefault();
+		});
+</script>

@@ -45,7 +45,7 @@ if (isset ( $_POST ['txtCarrera'] )) {
 
 ?>
 	<div class="col-md-2"></div>
-	<h2 class="page-header">Registrar Nueva Carrera</h4>
+	<h2 class="page-header">Registrar Nueva Carrera</h2>
 <form id="form1" name="form1" method="post" class="form-horizontal" action="">
 	<div class="form-group">
 		<label class="col-xs-3 control-label">Nombre Carrera: </label>

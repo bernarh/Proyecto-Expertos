@@ -1,7 +1,10 @@
 <?php
-
+if (!isset ( $_POST ['txtUsuario'] )) {
 include_once ("model/Usuario.php");
+}
 if (isset ( $_POST ['txtUsuario'] )) {
+	include_once ("../model/Conexion.php");
+	include_once ("../model/Usuario.php");
 	$conexion = new Conexion ();
 	$con=$conexion->getConexion();
 	$id = - 1;
@@ -30,17 +33,17 @@ if (isset ( $_POST ['txtUsuario'] )) {
 		$errors[]='seleccione el tipo de usuario';
 	}else{
 		//insertando
-		$usuario = new Usuario ( $id, $usuario, $tipoUsuario ,$idTipoUsuario, $password );
+		$usuario = new Usuario ( $id, $usuario, $tipoUsuario ,$idTipoUsuario, sha1($password) );
 		$validarUsuario= $usuario->validarUsuario($conexion);
 		$resultadoUsuario=$conexion->getRecords($validarUsuario);
 		if ($resultadoUsuario['cantidad']==0){
 			$usuario->insertNuevoUsuario ( $conexion );
-			//mensaje de insertado y redireccionando a pagina principal
+			
 			$conexion->close();
 			mysqli_free_result($validarUsuario);
-			echo "<script> alert ('Usuario Insertado Con Exito');</script>";
-
-			echo "<script> window.location='system.php?page=listar_usuarios';</script>";
+			//mensaje de insertado y redireccionando a pagina principal
+			$messages[]='Usuario Insertado Con Exito';
+			echo "<script> setInterval(window.location='system.php?page=listar_usuarios', 3000);</script>";
 		}else{
 			$errors[]='el nombre de usuario ya existe';
 			$conexion->close();
@@ -48,35 +51,63 @@ if (isset ( $_POST ['txtUsuario'] )) {
 		}
 	}
 
+	if (isset($errors)){ ?>
+		<div class="alert alert-danger" role="alert">
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+				<strong>Error!</strong> 
+				<?php
+					foreach ($errors as $error) {
+							echo $error;
+						}
+					?>
+		</div>
+		<?php
+		}
+	if (isset($messages)){ ?>
+				<div class="alert alert-success" role="alert">
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
+						<strong>¡Bien hecho!</strong>
+						<?php
+							foreach ($messages as $message) {
+									echo $message;
+								}
+							?>
+				</div>
+	<?php
+	}
+
 	
 }
-
+if (!isset ( $_POST ['txtUsuario'] )) {
 ?>
+
 <div class="col-md-2"></div>
 <h2 class="page-header">Registrar Nuevo Usuario</h2>
+<div id="resultado">		
+</div>
 <form id="form1" name="form1" method="post" action="" class="form-horizontal">
 	<div class="form-group">
 		<label class="col-xs-3 control-label">	Nombre Usuario:</label>
 		<div class="col-xs-5">
-			<input type="text" id="txtUsuario" name="txtUsuario" maxlength="50" minlength="1" autocomplete="off"/>
+			<input type="text" id="txtUsuario" name="txtUsuario" maxlength="50" minlength="1" autocomplete="off" required="" placeholder=" Nombre de Usuario"/>
 		</div>
 	</div>
 	<div class="form-group">
 		<label class="col-xs-3 control-label">Password:</label>
 		<div class="col-xs-5">
-			<input type="password" id="txtPassword" name="txtPassword" maxlength="16" minlength="8" autocomplete="off"/>
+			<input type="password" id="txtPassword" name="txtPassword" maxlength="16" minlength="8" autocomplete="off" required="" placeholder=" Contraseña" />
 		</div>
 	</div>
 	<div class="form-group">
 		<label class="col-xs-3 control-label">Password de Nuevo:</label>
 		<div class="col-xs-5">
-			<input type="password" id="txtPassword2" name="txtPassword2" maxlength="16" minlength="8" autocomplete="off"/>
+			<input type="password" id="txtPassword2" name="txtPassword2" maxlength="16" minlength="8" autocomplete="off" required="" placeholder=" Repita Contraseña"/>
 		</div>
 	</div>
 	<div class="form-group">
 		<label class="col-xs-3 control-label">Tipo de Usuario:</label>
 		<div class="col-xs-5">
-			<select id="selTipoUsuario" name="selTipoUsuario">
+			<select id="selTipoUsuario" name="selTipoUsuario" required="">
 					<option value="">--Seleccione un Tipo de Usuario--</option>
 					<?php 
 						$conexion = new Conexion ();
@@ -91,12 +122,7 @@ if (isset ( $_POST ['txtUsuario'] )) {
 			</select>
 		</div>
 	</div>
-		<?php
-			if (isset($errors)){
-				foreach ($errors as $error) {
-					echo $error;
-				}
-		}?>
+	
 	<div class="form-group">
 		<div class="col-xs-3">
 		</div>
@@ -105,3 +131,23 @@ if (isset ( $_POST ['txtUsuario'] )) {
 		</div>
 	</div>
 </form>
+<script src="./js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+	$("#form1").submit(function( event ) {
+		var parametros = $(this).serialize();
+			 $.ajax({
+					type: "POST",
+					url: "./pages/insertar_usuario.php",
+					data: parametros,
+					 beforeSend: function(objeto){
+						$("#resultado").html("Mensaje: Cargando...");
+					  },
+					success: function(datos){
+					$("#resultado").html(datos);
+					
+				  }
+			});
+		  event.preventDefault();
+		});
+</script>
+<?php } ?>

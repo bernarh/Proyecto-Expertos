@@ -16,7 +16,7 @@ echo EncabezadoAdministrar();
 	<thead>
 		
 	<tr>
-	<td colspan="5"><a href="system.php?page=insertar_usuario">Registrar Usuario </a>|<a href="system.php?page=listar_tipos_usuario"> Tipos de Usuarios</a></td>
+	<td colspan="5"><a href="system.php?page=insertar_usuario">Registrar Usuario </a></td>
 	</tr>
 	<tr>
 		<th>id</th>
@@ -33,8 +33,14 @@ echo EncabezadoAdministrar();
 		<td><?php echo $row['usuario']; ?></td>
 		<td><?php echo $row['tipo_usuario']; ?></td>
 		<td><?php echo ($row['estado_usuario']==1)?'Activo':'Inactivo'; ?></td>
-		<td><a href="system.php?page=editar_usuario&id=<?php echo $row['id_usuario']; ?>&id_tipo_usuario=<?php echo $row['id_tipo_usuario']; ?>">editar</a> | <a href="system.php?page=editar_pass_usuario&id=<?php echo $row['id_usuario']; ?>">Cambiar Contraseña</a> | <a href="system.php?page=eliminar_usuario&id=<?php echo $row['id_usuario']; ?>&estado=<?php echo $row['estado_usuario']; ?>"><?php echo ($row['estado_usuario']==1)?'Desactivar':'Activar'; ?></a></td>
-		<?php }?>
+		<td>
+		<?php if ($row['id_usuario']!=1){?>
+			<a href="system.php?page=editar_usuario&id=<?php echo $row['id_usuario']; ?>&id_tipo_usuario=<?php echo $row['id_tipo_usuario']; ?>">editar</a> |<?php } ?> <a href="system.php?page=editar_pass_usuario&id=<?php echo $row['id_usuario']; ?>">Cambiar Contraseña</a> |<a href="system.php?page=eliminar_usuario&id=<?php echo $row['id_usuario']; ?>&estado=<?php echo $row['estado_usuario']; ?>"><?php 
+
+		if ($row['id_usuario']!=1)
+				echo ($row['estado_usuario']==1)?'Desactivar':'Activar';
+		}
+		 ?></a></td>
 	</tr>
 	
 	</tbody>

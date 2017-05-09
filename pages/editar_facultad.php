@@ -1,4 +1,4 @@
-l<?php
+<?php
 
 include_once ("model/Carrera.php");
 if (isset ( $_POST ['txtFacultad'] )) {
