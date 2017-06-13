@@ -16,11 +16,11 @@ if(isset($_POST['id_cita']) && isset($_POST['nro_cuenta']) ){
 
         $nro_cuenta=$_POST['nro_cuenta'];
         $nombre =$_POST['nombres'];
-        $sala=02;
+        $sala=$_POST['nombre_sala'];
         //$fecha= NOW();
         $medico = new Medico();
-        $dateTime = date_create('now')->format('Y-m-d H:i:s');
-        $medico->insertarTv($conexionE,$idCita,$nro_cuenta,$nombre,$sala,$dateTime);
+        //$dateTime = date_create('now')->format('Y-m-d H:i:s');
+        $medico->insertarTv($conexionE,$idCita,$nro_cuenta,$nombre,$sala);
 
        //combiar de estado 
       $medico->estadoMostrarCita($conexionE,$idCita);
@@ -52,7 +52,7 @@ if(isset($_POST['id_cita']) && isset($_POST['nro_cuenta']) ){
           <td><?php echo $row['temperatura'].' '.'°C'; ?></td>
         </tr>
         <tr>
-          <th>Presion :</th>
+          <th>Presión :</th>
           <td><?php echo $row['presion'].' '.'mmHg'; ?></td>
         </tr>
         <tr>

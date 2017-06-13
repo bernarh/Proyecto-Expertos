@@ -3,8 +3,8 @@
 abstract class Config {
 	protected $server = '127.0.0.1';
 	protected $dataBase = 'db_clinica3';
-	protected $user = 'User';
-	protected $pass = 'user';
+	protected $user = 'root';
+	protected $pass = '';
 	
 	protected function getServer() {
 		return $this->server;

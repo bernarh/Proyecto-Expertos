@@ -133,6 +133,9 @@ include('menu.php');
 						include_once ("pages/cambiar_estado_tCita.php");
 					else if ($_GET ["page"] == "insertar_cita"&& ($_SESSION['id_tipo_usuario']==1 or $_SESSION['id_tipo_usuario']==4))
 						include_once ("pages/insertar_cita.php");
+
+					else if ($_GET ["page"] == "editar_paciente" && ($_SESSION['id_tipo_usuario']==1||$_SESSION['id_tipo_usuario']==4))
+						include_once ("pages/editar_paciente.php");
 					
 		//MODIFICDOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
 					else {

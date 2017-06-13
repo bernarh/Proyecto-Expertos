@@ -115,7 +115,7 @@ $resultMxC= $medico_x_cita->listarMedico_x_tipoCita($conexion,$id);
 		<h2 class="page-header">Actualizar medico</h2>
 
 	  <div class="card-content ">
-		<form id="form" class="form-horizontal" method="POST">
+		<form id="form1" class="form-horizontal" method="POST">
 		  
 			<div class="form-group">
 				<label class="control-label col-xs-3">Nombre:</label>
@@ -239,11 +239,17 @@ $resultMxC= $medico_x_cita->listarMedico_x_tipoCita($conexion,$id);
 
 <script type="text/javascript">
 
-	var formulario = document.getElementById("form");
+	var formulario = document.getElementById("form1");
 	
 	var validarNombre =function(e){
 		if (formulario.txtNombre.value==0) {
 			alert("Ingrese un nombre por favor");
+			e.preventDefault();
+		}
+	};
+	var validarApellido =function(e){
+		if (formulario.txtApellido.value==0) {
+			alert("Ingrese un apellido por favor");
 			e.preventDefault();
 		}
 	};
@@ -255,24 +261,49 @@ $resultMxC= $medico_x_cita->listarMedico_x_tipoCita($conexion,$id);
 			e.preventDefault();
 		}
 	};
-	/*var validarEstado = function(e){
-		if (formulario.estado[0].checked == true|| formulario.estado[1].checked == true) {
-
-		}else{
-			alert("Asignele un estado por favor");
-			e.preventDefault();
-		}
-	};*/
-
 	
+
+	var validarUsuario = function(e){
+		indiceU = document.getElementById("usuario").selectedIndex;
+		if (indiceU == null) {
+
+		alert("Elija un usuario por favor");
+			e.preventDefault();
+			
+		} 
+	};
+
+	var validarSala = function(e){
+		indiceS = document.getElementById("sala").selectedIndex;
+		if (indiceS == null || indiceS==0) {
+
+		alert("Elija una sala por favor");
+			e.preventDefault();
+			
+		} 
+	};
+
+	var validarTipoCita = function(e){
+		indiceTC = document.getElementById("listaTC").selectedIndex;
+		if (indiceTC == -1) {
+
+		alert("Asigne los tipos de citas que atendera por favor");
+			e.preventDefault();
+			
+		} 
+	};
+	
+
 	var validar = function(e){
 		validarNombre(e);
+		validarApellido(e);
 		validarGenero(e);
-		//validarEstado(e);
+		validarUsuario(e);
+		validarSala(e);
+		validarTipoCita(e);
 	} ;
 	
-	formulario.addEventListener("submit",validar);
-
+	formulario.addEventListener("submit",validar); 
 
 	//funciones del boton de select
 

@@ -5,7 +5,7 @@ include("model/Enfermeria.php");
 //Codigo para mostrar los datos de enfermeria de la cita especifica que se esta          atendiendo
 
 
-//echo "cita ".$_GET['id_cita'];
+
 
 
 //Mostrar todas las citas del medico de entrada
@@ -17,6 +17,7 @@ $medico = new Medico();
 $resultIdM = $medico->obtenerIdMedico($conexion,$idUsuario);
 $rowIdM=$conexion->getRecords($resultIdM);
 $idMedico =$rowIdM['id_medico'];
+//echo "medico : ".$rowIdM['id_medico'];
 //echo "Id :".$rowIdM['id_medico'];
 
 $resultC = $medico->citaMedicaEntrada($conexion,$idMedico);
@@ -64,7 +65,7 @@ $resultC = $medico->citaMedicaEntrada($conexion,$idMedico);
           <td><?php echo $rowCitas['apellidos']; ?></td>
           <td><?php echo $rowCitas['fecha_nacimiento'] ?></td>
           <td><?php echo $rowCitas['nombre_carrera'] ?></td>
-          <td><a id="a<?php echo $contador; ?>" href="javascript:llamar(<?php echo $rowCitas['id_cita']; ?>,<?php echo $rowCitas['nro_cuenta']; ?>,'<?php echo $rowCitas['nombres']; ?>','<?php echo $contador;?>')" >llamar y mostrar</a></td>
+          <td><a id="a<?php echo $contador; ?>" href="javascript:llamar(<?php echo $rowCitas['id_cita']; ?>,<?php echo $rowCitas['nro_cuenta']; ?>,'<?php echo $rowCitas['nombres']; ?>','<?php echo $contador;?>','<?php echo $rowCitas['nombre_sala']; ?>')" >llamar y mostrar</a></td>
 
         </tr>
      <?php } ?>  
@@ -82,10 +83,10 @@ $resultC = $medico->citaMedicaEntrada($conexion,$idMedico);
 <script src="./js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
 
-function llamar(id_cita,nro_cuenta,nombres,contador){
+function llamar(id_cita,nro_cuenta,nombres,contador,sala){
     var element = document.getElementById('a'+contador);
     element.removeAttribute('href');
-    var parametros = "id_cita="+id_cita+"&nro_cuenta="+nro_cuenta+"&nombres="+nombres;
+    var parametros = "id_cita="+id_cita+"&nro_cuenta="+nro_cuenta+"&nombres="+nombres+"&nombre_sala="+sala;
        $.ajax({
           type: "POST",
           url: "./pages/detalle_citas.php",

@@ -89,13 +89,17 @@ class Medico{
 	}
 //funcion buena de entrad
 public function citaMedicaEntrada($link,$id_medico) {
-		return $link->executeQuery(sprintf("SELECT A.nro_cuenta ,A.nombres ,A.apellidos,								A.fecha_nacimiento, B.nombre_carrera,C.id_tipo_cita,C.id_cita
+		return $link->executeQuery(sprintf("SELECT A.nro_cuenta ,A.nombres ,A.apellidos,A.fecha_nacimiento, B.nombre_carrera,C.id_tipo_cita,C.id_cita,E.nombre_sala
 									FROM tbl_pacientes A
                                     INNER JOIN tbl_carreras B
                                     ON(A.id_carrera=B.id_carrera)
 									INNER JOIN tbl_citas C
 									ON(A.nro_cuenta = C.nro_cuenta)
-                                    WHERE (C.estado=%d or C.estado=%d)  AND C.id_medico=%d ORDER BY C.fecha DESC",3,4,$id_medico ));
+                                    INNER JOIN tbl_medicos D
+									ON(D.id_medico = C.id_medico)
+                                    INNER JOIN tbl_salas E
+									ON(E.id_sala = D.id_sala)
+                                    WHERE (C.estado=%d or C.estado=%d)  AND C.id_medico=%d ORDER BY C.fecha ASC",3,4,$id_medico ));
 	}
 
 //---------------- funciones para encontrar la cita a elminar o finalizar ---
@@ -120,11 +124,15 @@ public function citaMedicaEntrada($link,$id_medico) {
 		return $link->executeNonQuery(sprintf("UPDATE tbl_citas SET estado = %d WHERE id_cita =%d" ,4,$id_cita));
 	}
 
-	public function insertarTv($link,$id_cita,$nro_cuenta,$nombre,$sala,$fecha){
+	/*public function insertarTv($link,$id_cita,$nro_cuenta,$nombre,$sala,$fecha){
 
 		return $link->executeNonQuery(sprintf("INSERT INTO tbl_tv(id_cita,nro_cuenta,nombre, sala, fecha) VALUES(%d,'%s','%s','%s','%s')", $id_cita,$nro_cuenta,$nombre,$sala,$fecha));
-	}
+	}*/
 
+	public function insertarTv($link,$id_cita,$nro_cuenta,$nombre,$sala){
+
+		return $link->executeNonQuery(sprintf("INSERT INTO tbl_tv(id_cita,nro_cuenta,nombre, sala, fecha) VALUES(%d,'%s','%s','%s',now())", $id_cita,$nro_cuenta,$nombre,$sala));
+	}
 	public function eliminardelTvCita($link,$id_cita){
 		return $link->executeNonQuery(sprintf("DELETE FROM tbl_tv  WHERE id_cita =%d",$id_cita));
 	}

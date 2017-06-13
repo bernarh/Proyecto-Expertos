@@ -19,8 +19,18 @@ try {
 		$nombre =$_POST['txtNombre'];
 		$apellido =$_POST['txtApellido'];
 		$genero =$_POST['genero'];
+		/*if ($_POST['genero'].checked == true || $_POST['genero'].checked == true) {
+			
+		}else{
+			echo "Selecione el genero por favor";
+		}*/
+		
 		$idUsuario =$_POST['usuario'];
 		$idSala =$_POST['sala'];
+
+		//validar
+
+
 		
 		$medicoA = new Medico($id,$nombre,$apellido,$genero,1,$idUsuario,$idSala);
 
@@ -81,17 +91,19 @@ $resultSala=$sala->listarSalas($conexion);
 
 	  <div class="card-content ">
 		<form id="form1" class="form-horizontal" method="POST">
- <div id="ok"></div> 
+ <div id="mensaje"></div> 
 			<div class="form-group">
 				<label class="control-label col-xs-3">Nombre:</label>
 				<div class="col-xs-5">
 					<input type="text" class="form-control" id="txtNombre" name="txtNombre" placeholder="Nombre">
+					<div id="nombreV"></div>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="control-label col-xs-3">Apellido:</label>
 				<div class="col-xs-5">
 					<input type="text" class="form-control" id="txtApellido" name="txtApellido" placeholder="Apellido">
+					<div id="apellidoV"></div>
 				</div>
 			</div>
 			<div class="form-group">
@@ -176,10 +188,11 @@ $resultSala=$sala->listarSalas($conexion);
 		  </div>
 			<div class="form-group">
 				<div class="col-xs-offset-3 col-xs-1">
-					<input type="submit" class="btn btn-primary " id="btnIngresar" name="btnIngresar" value="Registrar">
+					<input type="submit" class="btn btn-primary " id="btnIngresar" name="btnIngresar" value="Registrar" >
 				</div>
 				<div class="col-xs-offset-3 col-xs-1">
-					<a href="system.php?page=listamedicos" class="btn btn-default btn-sm">Cancelar</a>
+				<!--<input type="button" name="btnCsncelar" class="btn btn-default" onclick="cancelarInsersion();"  value="Cancelar">-->
+					<a href="system.php?page=listamedicos" class="btn btn-default ">Cancelar</a>
 				</div>
 			</div>
 		</form>
@@ -192,11 +205,20 @@ $resultSala=$sala->listarSalas($conexion);
 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
+<script type="text/javascript" src="dist/jquery.validate.js"></script>
+<script src="./js/jquery-3.2.1.min.js"></script>
 <!-- Funciones de javascrips para validar el formulario -->
 <script type="text/javascript">
 
-	var formulario = document.getElementById("form");
+var cancelarInsersion=function(){
+	header("Location: system.php?page=listamedicos");
+}
+
+//formulario.addEventListener("button",cancelarInsersion);
+
+///////////////////////////////
+
+	var formulario = document.getElementById("form1");
 	
 	var validarNombre =function(e){
 		if (formulario.txtNombre.value==0) {
@@ -218,33 +240,49 @@ $resultSala=$sala->listarSalas($conexion);
 			e.preventDefault();
 		}
 	};
-	var validarEstado = function(e){
-		if (formulario.estado[0].checked == true|| formulario.estado[1].checked == true) {
+	
 
-		}else{
-			alert("Asignele un estado por favor");
+	var validarUsuario = function(e){
+		indiceU = document.getElementById("usuario").selectedIndex;
+		if (indiceU == null || indiceU==0) {
+
+		alert("Elija un usuario por favor");
 			e.preventDefault();
-		}
-	};
-
-	var validarComboM = function(e){
-		if (formulario.usuario[0] == 0) {
-
-		}else{
-			alert("Elija un doctor por favor");
-			e.preventDefault();
+			
 		} 
 	};
 
+	var validarSala = function(e){
+		indiceS = document.getElementById("sala").selectedIndex;
+		if (indiceS == null || indiceS==0) {
 
+		alert("Elija una sala por favor");
+			e.preventDefault();
+			
+		} 
+	};
+
+	var validarTipoCita = function(e){
+		indiceTC = document.getElementById("listaTC").selectedIndex;
+		if (indiceTC == -1) {
+
+		alert("Asigne los tipos de citas que atendera por favor");
+			e.preventDefault();
+			
+		} 
+	};
 	
+
 	var validar = function(e){
 		validarNombre(e);
+		validarApellido(e);
 		validarGenero(e);
-		validarEstado(e);
+		validarUsuario(e);
+		validarSala(e);
+		validarTipoCita(e);
 	} ;
 	
-	//formulario.addEventListener("submit",validar); 
+	formulario.addEventListener("submit",validar); 
 	
 	/*$(document).ready(function() {
     $("#ok").hide();
@@ -273,7 +311,7 @@ $resultSala=$sala->listarSalas($conexion);
             var dataString = 'txtNombre='+$('#txtNombre').val()+'&txtApellido='+$('#txtApellido').val()+'...';
             $.ajax({
                 type: "POST",
-                url:"op_enviarRegistro.php",
+                url:"op_validar_insert.php",
                 data: dataString,
                 success: function(data){
                     $("#ok").html(data);
@@ -285,6 +323,53 @@ $resultSala=$sala->listarSalas($conexion);
     });
 });*/
 
+/*$(function(){
+	$("#btn_ajax").click(function(){
+		var url= "ajax.php";
+		$.ajax({
+			type:"POST",
+			url: url,
+			data: $("#form1").serialize(),
+			success: function(data){
+				$("#mensaje").html(data);
+			}
+		});
+		return false;
+	});
+});*/
+
+//////////////////////////////////////7
+/*var resultado = document.getElementById("mensaje");
+
+function validarInsercion(){
+
+	var xmlHttp;
+	if (window.XMLHttpRequest) {
+		xmlHttp = new XMLHttpRequest();
+	}else{
+		xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+
+	var nombre = formulario.txtNombre.value;
+	var apellido = formulario.txtApellido.value;
+	var generoM = formulario.estado[0];
+	var generoF = formulario.estado[1];
+
+	var datos = "nombre="+nombre+"&apellido="+apellido+"&generoM="+generoM+"&generoF="+generoF;
+
+	xmlHttp.onreadystatechange =function(){
+		if (xmlHttp.readystate===4 && xmlHttp.status===200) {
+			var msj = xmlHttp.responseText;
+			resultado.innerHTML=msj;
+		}
+	}
+
+	xmlHttp.open("POST","op_validar_inser.php",true);
+	xmlHttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	xmlHttp.send(datos);
+}*/
+//}
+//}
 
 
 

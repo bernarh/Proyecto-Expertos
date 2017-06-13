@@ -37,6 +37,7 @@ $resultCarrera= $carrera->listasTCarreras($conexion);
 				<td><?php echo $row['fecha_nacimiento']; ?></td>
 				<td><?php echo $row['nombre_carrera']; ?> </td>	
 
+
 				<!--<?php
 							$rowCarrera= $conexion->getRecords($resultCarrera);
 							if($rowCarrera['id_carrera']==$row['id_carrera'])
@@ -55,6 +56,7 @@ $resultCarrera= $carrera->listasTCarreras($conexion);
 					
 
 				</td>
+				<td><a href="system.php?page=editar_paciente&cuenta=<?php echo($row['nro_cuenta'])?>&nombre=<?php echo($row['nombres']);?>&apellido=<?php echo($row['apellidos']);?>&telefono=<?php echo($row['telefono']);?>&fecha=<?php echo($row['fecha_nacimiento']); ?>&genero=<?php echo($row['genero'])?>">editar</a></td>
 				<!-- TODO: modifique la consulta para que se muestre el nombre de la carrera y no el numero -->
 				<!-- TODO: Escriba los enlaces necesarios para realizar -->
 				<!-- las acciones de editar y eliminar estudiante -->

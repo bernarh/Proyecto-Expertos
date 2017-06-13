@@ -199,35 +199,35 @@
                             <div class="form-group">
                                 <label class="col-xs-3 control-label">Temperatura</label>
                                 <div class="col-xs-5">
-                                    <input type="text" class="form-control" name="temperatura" />
+                                    <input type="text" class="form-control" name="temperatura"  required="" onkeypress="return isNumberKey(event)"/>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-xs-3 control-label">Presión</label>
                                 <div class="col-xs-5">
-                                    <input type="text" class="form-control" name="presion" />
+                                    <input type="text" class="form-control" name="presion"  required="" onkeypress="return isNumberKey(event)"/>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-xs-3 control-label">Pulso</label>
                                 <div class="col-xs-5">
-                                    <input type="text" class="form-control" name="pulso" onkeypress="return isNumberKey(event)"/>
+                                    <input type="text" class="form-control" name="pulso"  required="" onkeypress="return isNumberKey(event)"/>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-xs-3 control-label">Peso</label>
                                 <div class="col-xs-5">
-                                    <input type="text" class="form-control" name="peso" onkeypress="return isNumberKey(event)"/>
+                                    <input type="text" class="form-control" name="peso"  required="" onkeypress="return isNumberKey(event)"/>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-xs-3 control-label">Talla</label>
                                 <div class="col-xs-5">
-                                    <input type="text" class="form-control" name="talla" onkeypress="return isNumberKey(event)"/>
+                                    <input type="text" class="form-control" name="talla" required=""  onkeypress="return isNumberKey(event)"/>
                                 </div>
                             </div>
 
@@ -250,7 +250,15 @@
   </div>
 
 </section>
-
+<script type="text/javascript">
+  function isNumberKey(evt){
+    var charCode = (evt.which) ? evt.which : event.keyCode
+    if (charCode > 31 && (charCode < 48 || charCode > 57))
+        if (charCode != 46)
+        return false;
+    return true;
+}
+</script>
 <?php unset($_GET["id_cita"]);
 
 

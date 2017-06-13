@@ -10,7 +10,7 @@ include("../model/Conexion.php");
         $conexion = new Conexion();
         $medicoF = new Medico();
         $medicoF->finalizarCita($conexion,$id_cita);
-       // $medicoF->eliminardelTvCita($conexion,$id_cita);
+        $medicoF->eliminardelTvCita($conexion,$id_cita);
 
         header("Location: ../system.php?page=vista");
 
